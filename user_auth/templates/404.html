@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}页面未找到 - 用户登录系统{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-content">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-triangle fa-5x"></i>
+        </div>
+        <h1>404 - 页面未找到</h1>
+        <p class="error-message">抱歉，您访问的页面不存在或已被移除。</p>
+        
+        <div class="error-actions">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">
+                <i class="fas fa-home"></i> 返回首页
+            </a>
+            <a href="javascript:history.back()" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> 返回上一页
+            </a>
+        </div>
+        
+        <div class="error-help">
+            <h3><i class="fas fa-question-circle"></i> 可能的原因：</h3>
+            <ul>
+                <li>页面地址输入错误</li>
+                <li>页面已被删除或移动</li>
+                <li>您没有访问该页面的权限</li>
+                <li>系统正在维护中</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

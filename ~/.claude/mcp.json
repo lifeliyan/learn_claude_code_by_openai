@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "weather-server": {
+      "command": "/home/liyan/claude/learn/learn-claude-code-deepseek_2/venv/bin/python",
+      "args": ["/home/liyan/claude/learn/learn-claude-code-deepseek_2/weather_server_simple.py"]
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - 用户登录系统{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>欢迎使用用户登录系统</h1>
+    <p class="subtitle">安全、可靠的用户认证解决方案</p>
+    
+    {% if user %}
+        <div class="welcome-message">
+            <h2><i class="fas fa-user-check"></i> 欢迎回来，{{ user.username }}！</h2>
+            <p>您已成功登录系统。</p>
+            <div class="user-info">
+                <p><strong>邮箱：</strong> {{ user.email }}</p>
+                <p><strong>注册时间：</strong> {{ user.created_at.strftime('%Y-%m-%d %H:%M:%S') if user.created_at else '未知' }}</p>
+                <p><strong>最后登录：</strong> {{ user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login else '首次登录' }}</p>
+            </div>
+            <div class="actions">
+                <a href="{{ url_for('profile') }}" class="btn btn-primary">
+                    <i class="fas fa-user-circle"></i> 查看个人资料
+                </a>
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> 退出登录
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="auth-options">
+            <h2>请登录或注册</h2>
+            <p>体验完整的功能和安全的用户认证系统。</p>
+            <div class="buttons">
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-large">
+                    <i class="fas fa-sign-in-alt"></i> 立即登录
+                </a>
+                <a href="{{ url_for('register') }}" class="btn btn-secondary btn-large">
+                    <i class="fas fa-user-plus"></i> 注册新账户
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<div class="features">
+    <h2>系统特性</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>安全认证</h3>
+            <p>使用bcrypt哈希算法存储密码，防止密码泄露。</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-user-lock"></i>
+            <h3>会话管理</h3>
+            <p>安全的会话管理，支持记住登录状态。</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-history"></i>
+            <h3>登录保护</h3>
+            <p>防止暴力破解，限制登录尝试次数。</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-database"></i>
+            <h3>数据持久化</h3>
+            <p>使用SQLite数据库存储用户信息。</p>
+        </div>
+    </div>
+</div>
+
+<div class="api-demo">
+    <h2>API接口</h2>
+    <p>系统提供RESTful API接口，可用于前端应用集成。</p>
+    <div class="code-block">
+        <pre><code>// 检查认证状态
+GET /api/check_auth
+
+// 返回示例
+{
+    "authenticated": true,
+    "user": {
+        "id": 1,
+        "username": "admin",
+        "email": "admin@example.com",
+        "created_at": "2024-01-01T00:00:00",
+        "last_login": "2024-01-01T12:00:00",
+        "is_active": true
+    }
+}</code></pre>
+    </div>
+</div>
+{% endblock %}

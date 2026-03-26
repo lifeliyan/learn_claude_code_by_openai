@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}注册 - 用户登录系统{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1><i class="fas fa-user-plus"></i> 用户注册</h1>
+        <p class="auth-subtitle">创建新账户，体验完整功能</p>
+        
+        <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> 用户名
+                </label>
+                <input type="text" id="username" name="username" 
+                       placeholder="请输入用户名（至少3个字符）" required
+                       value="{{ request.form.username if request.form }}">
+                <small class="form-text">用户名将用于登录，不能更改</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> 邮箱地址
+                </label>
+                <input type="email" id="email" name="email" 
+                       placeholder="请输入有效的邮箱地址" required
+                       value="{{ request.form.email if request.form }}">
+                <small class="form-text">请输入有效的邮箱地址</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> 密码
+                </label>
+                <input type="password" id="password" name="password" 
+                       placeholder="请输入密码（至少6个字符）" required>
+                <div class="password-strength">
+                    <div class="strength-bar"></div>
+                    <span class="strength-text">密码强度：弱</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">
+                    <i class="fas fa-lock"></i> 确认密码
+                </label>
+                <input type="password" id="confirm_password" name="confirm_password" 
+                       placeholder="请再次输入密码" required>
+                <small class="form-text">请确保两次输入的密码一致</small>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-user-plus"></i> 注册账户
+                </button>
+            </div>
+            
+            <div class="auth-links">
+                <p>已有账户？ <a href="{{ url_for('login') }}">立即登录</a></p>
+                <p><a href="{{ url_for('index') }}">返回首页</a></p>
+            </div>
+        </form>
+        
+        <div class="terms-notice">
+            <h3><i class="fas fa-info-circle"></i> 注册须知</h3>
+            <ul>
+                <li>用户名一旦注册不能更改</li>
+                <li>请使用安全的密码，建议包含字母、数字和特殊字符</li>
+                <li>您的密码会使用bcrypt算法进行哈希存储，确保安全</li>
+                <li>注册即表示您同意我们的服务条款</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="password-guidelines">
+    <h3><i class="fas fa-key"></i> 密码安全指南</h3>
+    <div class="guidelines-grid">
+        <div class="guideline-card good">
+            <h4><i class="fas fa-check-circle"></i> 推荐做法</h4>
+            <ul>
+                <li>使用至少8个字符</li>
+                <li>混合大小写字母</li>
+                <li>包含数字和特殊字符</li>
+                <li>使用不常见的单词组合</li>
+            </ul>
+        </div>
+        <div class="guideline-card bad">
+            <h4><i class="fas fa-times-circle"></i> 避免做法</h4>
+            <ul>
+                <li>使用简单密码如"123456"</li>
+                <li>使用个人信息如生日</li>
+                <li>在不同网站使用相同密码</li>
+                <li>将密码写在便签上</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

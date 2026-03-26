@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "weather-server": {
+      "command": "/absolute/path/to/venv/bin/python3",
+      "args": ["/absolute/path/to/weather_server.py"],
+      "env": {
+        "OPENWEATHERMAP_API_KEY": "your_key_here",
+        "WEATHERAPI_API_KEY": "your_key_here",
+        "VISUALCROSSING_API_KEY": "your_key_here"
+      }
+    }
+  }
+}

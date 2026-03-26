@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}个人资料 - 用户登录系统{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1><i class="fas fa-user-circle"></i> 个人资料</h1>
+        <p class="profile-subtitle">查看和管理您的账户信息</p>
+    </div>
+    
+    <div class="profile-content">
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <i class="fas fa-user fa-4x"></i>
+                <div class="avatar-badge">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+            
+            <div class="profile-info">
+                <h2>{{ user.username }}</h2>
+                <p class="user-email">{{ user.email }}</p>
+                
+                <div class="user-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">用户ID</span>
+                        <span class="stat-value">{{ user.id }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">账户状态</span>
+                        <span class="stat-value status-active">
+                            <i class="fas fa-check-circle"></i> 活跃
+                        </span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">注册时间</span>
+                        <span class="stat-value">{{ user.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">最后登录</span>
+                        <span class="stat-value">
+                            {% if user.last_login %}
+                                {{ user.last_login.strftime('%Y-%m-%d %H:%M:%S') }}
+                            {% else %}
+                                首次登录
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-actions">
+            <h3><i class="fas fa-cogs"></i> 账户操作</h3>
+            <div class="action-grid">
+                <a href="#" class="action-card">
+                    <i class="fas fa-key"></i>
+                    <h4>修改密码</h4>
+                    <p>定期更新密码确保安全</p>
+                </a>
+                <a href="#" class="action-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>更新邮箱</h4>
+                    <p>更改账户绑定的邮箱地址</p>
+                </a>
+                <a href="{{ url_for('logout') }}" class="action-card logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <h4>退出登录</h4>
+                    <p>安全退出当前账户</p>
+                </a>
+                <a href="{{ url_for('index') }}" class="action-card">
+                    <i class="fas fa-home"></i>
+                    <h4>返回首页</h4>
+                    <p>回到系统主页面</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="security-section">
+            <h3><i class="fas fa-shield-alt"></i> 安全信息</h3>
+            <div class="security-grid">
+                <div class="security-card">
+                    <h4><i class="fas fa-lock"></i> 密码安全</h4>
+                    <p>您的密码使用bcrypt算法进行哈希存储，确保即使数据库泄露也不会暴露明文密码。</p>
+                </div>
+                <div class="security-card">
+                    <h4><i class="fas fa-history"></i> 登录保护</h4>
+                    <p>系统会记录所有登录尝试，防止暴力破解攻击。连续失败将暂时锁定账户。</p>
+                </div>
+                <div class="security-card">
+                    <h4><i class="fas fa-cookie"></i> 会话安全</h4>
+                    <p>使用安全的HTTP-only Cookie存储会话信息，防止XSS攻击窃取会话。</p>
+                </div>
+                <div class="security-card">
+                    <h4><i class="fas fa-database"></i> 数据加密</h4>
+                    <p>敏感信息在传输和存储过程中都进行了适当的加密处理。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-section">
+            <h3><i class="fas fa-code"></i> API访问</h3>
+            <p>您的账户可以通过以下API接口进行访问：</p>
+            <div class="code-block">
+                <pre><code>// 检查认证状态
+fetch('/api/check_auth')
+    .then(response => response.json())
+    .then(data => {
+        if (data.authenticated) {
+            console.log('当前用户：', data.user.username);
+        } else {
+            console.log('未登录');
+        }
+    });</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
